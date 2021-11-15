@@ -10,12 +10,7 @@ $YOUR_NAME = "ECOTERROR"
 	
 $cert = New-SelfSignedCertificate -DnsName $YOUR_NAME -CertStoreLocation "Cert:\CurrentUser\My" -KeyLength 2048 -HashAlgorithm "Sha384" -NotBefore ((Get-Date).AddDays(-1)) -NotAfter (Get-Date -Year 2099 -Month 12 -Day 31) -Type DocumentEncryptionCert -KeyUsage KeyEncipherment, DataEncipherment
 
-$path = "C:\temp"
-
-If(!(test-path $path))
-{
-      New-Item -ItemType Directory -Force -Path $path
-}
+New-Item -ItemType Directory -Force -Path "C:\temp\"
 
 Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 
@@ -27,7 +22,7 @@ $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.c
 Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
-# Password generator for the "DEFCON 28 DEMO 2020" Certificate
+# Password generator for the certificate
 #----------------------------------------------------------------------------------------------------------------------------------------
 [Reflection.Assembly]::LoadWithPartialName("System.Web")
 $pwd2 = [system.web.security.membership]::GeneratePassword(32,15)

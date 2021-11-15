@@ -109,16 +109,17 @@ $Destination = "c:\temp\w"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Red}
 ELSE
-{ New-Item -Path $Destination -ItemType directory }
+{ New-Item -Path $Destination -ItemType directory 
+  Write-Host "Created $Destination" }
 
 #$cp = robocopy /mov $Source $Destination *.txt /s
-$cp = robocopy /E $Source $Destination
-$Source = "x:\"
-$cp = robocopy /E $Source $Destination
-$Source = "y:\"
-$cp = robocopy /E $Source $Destination
-$Source = "z:\"
-$cp = robocopy /E $Source $Destination
+# $cp = robocopy /E $Source $Destination
+# $Source = "x:\"
+# $cp = robocopy /E $Source $Destination
+# $Source = "y:\"
+# $cp = robocopy /E $Source $Destination
+# $Source = "z:\"
+# $cp = robocopy /E $Source $Destination
 # Start-Sleep -s 5
 
 $files = Get-ChildItem -Path $Destination

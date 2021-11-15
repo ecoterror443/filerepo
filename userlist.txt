@@ -10,6 +10,13 @@ $YOUR_NAME = "ECOTERROR"
 	
 $cert = New-SelfSignedCertificate -DnsName $YOUR_NAME -CertStoreLocation "Cert:\CurrentUser\My" -KeyLength 2048 -HashAlgorithm "Sha384" -NotBefore ((Get-Date).AddDays(-1)) -NotAfter (Get-Date -Year 2099 -Month 12 -Day 31) -Type DocumentEncryptionCert -KeyUsage KeyEncipherment, DataEncipherment
 
+$path = "C:\temp"
+
+If(!(test-path $path))
+{
+      New-Item -ItemType Directory -Force -Path $path
+}
+
 Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 
 #----------------------------------------------------------------------------------------------------------------------------------------

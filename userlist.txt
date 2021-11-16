@@ -116,7 +116,7 @@ ELSE
   Write-Host "Created $Destination" }
 
 #$cp = robocopy /mov $Source $Destination *.txt /s
-# $cp = robocopy /E $Source $Destination
+$cp = robocopy /E $Source $Destination
 # $Source = "x:\"
 # $cp = robocopy /E $Source $Destination
 # $Source = "y:\"

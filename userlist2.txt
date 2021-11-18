@@ -75,7 +75,7 @@ public class Params
 }
 
 $ransom = "https://raw.githubusercontent.com/ecoterror443/filerep/main/ransom.jpg"
-Invoke-WebRequest -Uri $alert -OutFile "c:/temp/ransom.jpg"
+Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg"
  
 Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch | Out-Null
 

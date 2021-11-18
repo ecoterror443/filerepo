@@ -398,21 +398,21 @@ $Counter_Label.AutoSize = $true
 $Counter_Label.ForeColor = "Green"
 $Form.Controls.Add($Counter_Label)
 
-# while ($delay -ge 0)
-# {
-# 	$Form.Show()
-#     $Counter_Label.Text = "Seconds Remaining: $($delay)"
-# 	if ($delay -lt 5)
-# 	  { 
-# 		 $Counter_Label.ForeColor = "Green"
-# 		 $fontsize = 20-$delay
-# 		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-# 		 $Counter_Label.Font = $warningfont
-# 	  }
-# Start-Sleep 1
-# $delay -= 1	  
-# }
-# $Form.Close()
+while ($delay -ge 0)
+{
+	$Form.Show()
+    $Counter_Label.Text = "Seconds Remaining: $($delay)"
+	if ($delay -lt 5)
+	  { 
+		 $Counter_Label.ForeColor = "Green"
+		 $fontsize = 20-$delay
+		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+		 $Counter_Label.Font = $warningfont
+	  }
+Start-Sleep 1
+$delay -= 1	  
+}
+$Form.Close()
 $background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"
 Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/img.png"
 # Start-Sleep -s 2

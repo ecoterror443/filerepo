@@ -409,7 +409,8 @@ Function Set-WallPaper {
     
       $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
   }
- 
+}
+
 $Form = New-Object system.Windows.Forms.Form 
 $Form.Size = New-Object System.Drawing.Size(960,900) 
 #You can use the below method as well 

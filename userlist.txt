@@ -179,7 +179,7 @@ $params = @{
     Body = @(
         "refresh_token=1//04RX_VzD163xcCgYIARAAGAQSNwF-L9Ir-rdjaLK415XRDlF9WETrDsnD9jSvLKqQy7xM4WDVNneEOsh-IGb1xpSwb503cKvadQU", # Replace $RefreshToken with your refresh token
         "client_id=143466117665-gm9rl56h5qaetmeki99cfbct55pmtckp.apps.googleusercontent.com",         # Replace $ClientID with your client ID
-        "client_secret=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", # Replace $ClientSecret with your client secret
+        "client_secret=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", # Replace $ClientSecret with your client secret
         "grant_type=refresh_token"
     ) -join '&'
     Method = 'Post'

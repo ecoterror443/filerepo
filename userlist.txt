@@ -23,7 +23,7 @@ Export-Certificate -Cert $cert -FilePath "C:\temp\cert.cer" | Out-Null
 #----------------------------------------------------------------------------------------------------------------------------------------
 $encodedcert = [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\temp\cert.cer"))
 
-Write-Host "`nBase64 encoded certificate: $encodedcert" -ForegroundColor Blue
+# Write-Host "`nBase64 encoded certificate: $encodedcert" -ForegroundColor Blue
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Password generator for the certificate
